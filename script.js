@@ -1,0 +1,21 @@
+const btnPrev = document.querySelector('button.arrow.prev');
+const btnNext = document.querySelector('button.arrow.next');
+const ul = document.querySelector('div.images > ul');
+const liWidth = document.querySelector('div.images > ul > li').clientWidth;
+const limit = ul.querySelectorAll('img').length * liWidth;
+
+const count = 3;
+let position = 0;
+
+const scrollFn = (isNext) => {
+  const off = position + (count * (isNext ? liWidth : -(liWidth)));
+  if (off < 0 || off > limit) {
+    return;
+  }
+
+  position = off;
+  ul.style.transform = `translateX(${-(position)}px)`;
+};
+
+btnPrev.onclick = () => scrollFn(false);
+btnNext.onclick = () => scrollFn(true);
